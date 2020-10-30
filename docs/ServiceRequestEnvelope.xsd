@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ServiceRequestEnvelope" nillable="true" type="ServiceRequestEnvelope" />
+  <xs:complexType name="ServiceRequestEnvelope">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ClientCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ClientAccessKey" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Created" type="DateTimeType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ExternalReference" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="InvoicingParty" type="DeclarationStakeholderType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CustomsDeclaration" type="CustomsDeclarationType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Flow" nillable="true" type="Process" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TransportMode" nillable="true" type="TransportModeType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Version" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Attachments" type="ArrayOfAttachmentType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DateTimeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="DateTimeUtc" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeclarationStakeholderType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="CountryCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="City" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PostalCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Street" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TraderId" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="VatId" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UniqueIdentifier" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomsDeclarationType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Operation" type="CustomsOperationType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CommercialReference" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LoadType" nillable="true" type="LoadTypeCode" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CustomsEntryExitCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CustomsLocationCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CommoditiesLocationCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DestinationLoCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="OriginLoCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DepartureDate" type="UniversalDateType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ArrivalDate" type="UniversalDateType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GoodsDescription" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IncotermCode" nillable="true" type="IncotermCode" />
+      <xs:element minOccurs="0" maxOccurs="1" name="IncotermPlace" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Shipper" type="DeclarationStakeholderType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Consignee" type="DeclarationStakeholderType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalGrossWeight" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TotalNetWeight" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TotalPackages" type="PackagesType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TotalInvoicePrice" type="MoneyAmountType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="BorderTransport" type="MeansOfTransportType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="InlandTransport" type="MeansOfTransportType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TransportDocument" type="ProducedDocumentType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GuaranteeReference" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Adjustments" type="ArrayOfItemAdjustmentType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Items" type="ArrayOfCustomsDeclarationItemType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="CustomsOperationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DUAE" />
+      <xs:enumeration value="AVI" />
+      <xs:enumeration value="EAL" />
+      <xs:enumeration value="EXS" />
+      <xs:enumeration value="T2L" />
+      <xs:enumeration value="DUAI" />
+      <xs:enumeration value="DVD" />
+      <xs:enumeration value="TRANSITO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LoadTypeCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FCL" />
+      <xs:enumeration value="LCL" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="UniversalDateType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Date" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="IncotermCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EXW" />
+      <xs:enumeration value="FCA" />
+      <xs:enumeration value="FAS" />
+      <xs:enumeration value="FOB" />
+      <xs:enumeration value="CFR" />
+      <xs:enumeration value="CIF" />
+      <xs:enumeration value="CPT" />
+      <xs:enumeration value="CIP" />
+      <xs:enumeration value="DAT" />
+      <xs:enumeration value="DAP" />
+      <xs:enumeration value="DDP" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="PackagesType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Number" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MoneyAmountType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Value" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CurrencyIso" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MeansOfTransportType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Identity" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ModeType" nillable="true" type="TransportModeType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CountryCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TransportModeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="1" />
+      <xs:enumeration value="2" />
+      <xs:enumeration value="3" />
+      <xs:enumeration value="4" />
+      <xs:enumeration value="5" />
+      <xs:enumeration value="7" />
+      <xs:enumeration value="8" />
+      <xs:enumeration value="9" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ProducedDocumentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Reference" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Date" type="UniversalDateType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfItemAdjustmentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Adjustment" nillable="true" type="ItemAdjustmentType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemAdjustmentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Amount" type="MoneyAmountType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ExchangeRate" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AmountInEur" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Type" type="AdjustmentType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ValueType" type="AdjustmentValueType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AdjustmentType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INSURANCE_ADDITION" />
+      <xs:enumeration value="TRANSPORT_ADDITION" />
+      <xs:enumeration value="FURTHER_ADDITION" />
+      <xs:enumeration value="TRANSPORT_DEDUCTION" />
+      <xs:enumeration value="FURTHER_DEDUCTION" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AdjustmentValueType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DUTY_VALUE" />
+      <xs:enumeration value="STATISTICAL_VALUE" />
+      <xs:enumeration value="VAT_VALUE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfCustomsDeclarationItemType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Item" nillable="true" type="CustomsDeclarationItemType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomsDeclarationItemType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="SequenceNumber" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Classification" type="ItemClassificationType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GoodsDescription" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="GrossWeight" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="NetWeight" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="NetPrice" type="MoneyAmountType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="OriginCountryCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Packages" type="ItemPackagesType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Units" type="ItemUnitsType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Procedure" type="CustomsProcedureType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Preference" type="CustomsPreferenceType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Box40" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Adjustments" type="ArrayOfItemAdjustmentType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Containers" type="ArrayOfItemContainerType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ProducedDocuments" type="ArrayOfProducedDocumentType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemClassificationType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="TariffNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AdditionalCode1" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AdditionalCode2" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AdditionalCode3" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="QuotaCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SupplementaryUnits" type="ItemUnitsType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemUnitsType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Number" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemPackagesType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Marks" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Number" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeCode" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomsProcedureType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="RequestedProcedure" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PreviousProcedure" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomsPreferenceType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Preference1" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Preference2" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfItemContainerType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Container" nillable="true" type="ItemContainerType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemContainerType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Number" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfProducedDocumentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Document" nillable="true" type="ProducedDocumentType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Process">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="IMPORT" />
+      <xs:enumeration value="EXPORT" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfAttachmentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Attachment" nillable="true" type="AttachmentType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AttachmentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" nillable="true" type="AttachmentTypeCode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AttachmentTypeCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UNQUALIFIED" />
+      <xs:enumeration value="INVOICE" />
+      <xs:enumeration value="PACKING_LIST" />
+      <xs:enumeration value="CERTIFICATE" />
+      <xs:enumeration value="TAD" />
+      <xs:enumeration value="SAD" />
+      <xs:enumeration value="EAD" />
+      <xs:enumeration value="D9" />
+      <xs:enumeration value="D9PL" />
+      <xs:enumeration value="POE" />
+      <xs:enumeration value="OTHER_FILE" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

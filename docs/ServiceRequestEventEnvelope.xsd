@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ServiceRequestEventEnvelope" nillable="true" type="ServiceRequestEnvelope" />
+  <xs:complexType name="ServiceRequestEnvelope">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ClientCode" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ServiceRequestId" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Created" type="DateTimeType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ExternalReference" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" type="EventsTypeIdentCode" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CustomsClearanceData" type="CustomsClearanceEventDataType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Attachments" type="ArrayOfAttachmentType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Containers" type="ArrayOfItemContainerType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DateTimeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="DateTimeUtc" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="EventsTypeIdentCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SND" />
+      <xs:enumeration value="BLOCKED" />
+      <xs:enumeration value="RLD" />
+      <xs:enumeration value="DEP" />
+      <xs:enumeration value="TAX" />
+      <xs:enumeration value="INV" />
+      <xs:enumeration value="CANCEL" />
+      <xs:enumeration value="CPLT" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CustomsClearanceEventDataType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="AdmissionDate" type="UniversalDateType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Channel" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="MRN" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ClearanceDate" type="UniversalDateType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Taxes" type="ArrayOfCustomsClearanceTaxType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UniversalDateType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Date" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfCustomsClearanceTaxType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Tax" nillable="true" type="CustomsClearanceTaxType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomsClearanceTaxType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="ItemNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Code" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TaxAmount" type="MoneyAmountType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MoneyAmountType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Value" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CurrencyIso" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfAttachmentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Attachment" nillable="true" type="AttachmentType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AttachmentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Code" nillable="true" type="AttachmentTypeCode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AttachmentTypeCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UNQUALIFIED" />
+      <xs:enumeration value="INVOICE" />
+      <xs:enumeration value="PACKING_LIST" />
+      <xs:enumeration value="CERTIFICATE" />
+      <xs:enumeration value="TAD" />
+      <xs:enumeration value="SAD" />
+      <xs:enumeration value="EAD" />
+      <xs:enumeration value="D9" />
+      <xs:enumeration value="D9PL" />
+      <xs:enumeration value="POE" />
+      <xs:enumeration value="OTHER_FILE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfItemContainerType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Container" nillable="true" type="ItemContainerType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemContainerType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeCode" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Number" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
