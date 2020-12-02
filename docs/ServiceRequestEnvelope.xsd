@@ -30,8 +30,15 @@
       <xs:element minOccurs="0" maxOccurs="1" name="TraderId" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="VatId" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="UniqueIdentifier" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="OperatingMode" type="StakeholderOperatingMode" />
     </xs:sequence>
   </xs:complexType>
+  <xs:simpleType name="StakeholderOperatingMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BUSINESS" />
+      <xs:enumeration value="PRIVATE" />
+    </xs:restriction>
+  </xs:simpleType>
   <xs:complexType name="CustomsDeclarationType">
     <xs:sequence>
       <xs:element minOccurs="1" maxOccurs="1" name="Operation" type="CustomsOperationType" />
